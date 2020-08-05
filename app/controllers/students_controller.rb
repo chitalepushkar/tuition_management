@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = params[:query].present? ? Student.find_by_query(params[:query]) : Student.all
+    @students = params[:query].present? ? Student.find_by_query(params[:query]) : Student.all_students
   end
 
   # GET /students/1
@@ -37,7 +37,9 @@ class StudentsController < ApplicationController
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
-    @student.destroy
+    #@student.destroy
+    # Soft deleting student for now
+    @student.update(is_deleted: true)
   end
 
   private
